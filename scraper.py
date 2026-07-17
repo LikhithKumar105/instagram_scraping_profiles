@@ -72,7 +72,9 @@ class InstagramScraper:
 
         print(f"Visible : {total}")
 
-        for i in range(total):
+        PINNED_REELS_TO_SKIP = 3
+
+        for i in range(PINNED_REELS_TO_SKIP, total):
 
             try:
 
@@ -85,9 +87,12 @@ class InstagramScraper:
 
                 url = "https://www.instagram.com" + href
 
+                # icon = card.locator(
+                #     "svg[aria-label='View count icon']"
+                # )
                 icon = card.locator(
-                    "svg[aria-label='View count icon']"
-                )
+                        "svg[aria-label*='View'], svg[aria-label*='view']"
+                    )
 
                 if not icon.count():
                     continue
